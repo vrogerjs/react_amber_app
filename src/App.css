@@ -1,0 +1,98 @@
+.App {
+  #text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.time:hover {
+  background-color: #0f62ac !important;
+  color: #fff !important;
+}
+
+.bg-gore {
+  background-color: #0f62ac !important;
+}
+
+.color-plomo {
+  background-color: #f0f0f0 !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.fw-bold {
+  font-weight: bold !important;
+}
+
+.color-gore {
+  color: #0f62ac !important;
+}
+
+.border-color-white {
+  border: solid 1px #fff;
+}
+
+.vertical-align {
+  vertical-align: middle;
+}
+
+.border-nav {
+  border-bottom: 2px solid #fff;
+}
+
+.hover-white:hover {
+  color: white;
+}
+
+.table-gore {
+  line-height: 15px !important;
+  padding: 10px !important;
+  border: 2px solid #fff;
+}
+
+.bg-teal {
+  background-color: #009688 !important;
+}
+
+.font-size-14{
+  font-size: 20px !important;
+}
+
+/* .MuiGrid-item {
+  padding-right: 8px;
+} */
