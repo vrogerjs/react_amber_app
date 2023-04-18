@@ -10,13 +10,13 @@ import TextField from '@mui/material/TextField';
 import { useDispatch } from "react-redux";
 import Alert from '@mui/material/Alert';
 
-function DesaparecidoDisabledExample() {
+function UbicadoDisabledExample() {
 
     const formRef: any = createRef();
 
     const { width, height } = useResize(React);
 
-    const [desaparecidos, setDesaparecidos] = useState([] as any);
+    const [ubicados, setUbicados] = useState([] as any);
 
     const [state, setState] = useState({ page: 0, rowsPerPage: 15, totalElements: 0 });
 
@@ -55,7 +55,7 @@ function DesaparecidoDisabledExample() {
 
     const fetchData = async (page) => {
         var data = { data: [], size: 0 };
-        const result = await (http.get(process.env.REACT_APP_PATH + '/desaparecido/' + page + '/' + state.rowsPerPage + '?estado=0'));
+        const result = await (http.get(process.env.REACT_APP_PATH + '/desaparecido/' + page + '/' + state.rowsPerPage + '?estado=1'));
         if (result !== '') {
             data.size = result.size;
             state.totalElements = result.totalElements;
@@ -84,7 +84,7 @@ function DesaparecidoDisabledExample() {
             <Container maxWidth="lg">
                 <Card>
                     <Typography gutterBottom component="div" fontSize={'20px'} className='text-center fw-bold pt-2' sx={{ textTransform: 'uppercase' }}>
-                        Personas Desaparecidas menores a 17 años
+                        Personas Ubicadas menores a 17 años
                     </Typography>
                     <Grid container>
                         {/* <Grid item xs={12} sm={12} md={10} className='p-3'>
@@ -108,7 +108,6 @@ function DesaparecidoDisabledExample() {
                                                     src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (process.env.PUBLIC_URL + "/male-female.jpg")}
                                                     style={{ display: 'block', margin: '0 auto' }}
                                                 />
-                                                {/* <img alt="Foto" height={'200px'} width={'150px'} src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (process.env.PUBLIC_URL + "/male-female.jpg")} /> */}
                                                 <CardContent>
                                                     <Typography gutterBottom component="div" textAlign={'center'} fontSize={'20px'} fontWeight={'bold'}>
                                                         {row.persona.apePaterno} {row.persona.apeMaterno} {row.persona.nombres}
@@ -125,13 +124,13 @@ function DesaparecidoDisabledExample() {
                                                     <Button fullWidth className='hover-white mb-1' variant="contained" color="error" href={process.env.PUBLIC_URL + `/alerta/${row.id}`} startIcon={<FileCopy />}>
                                                         Nota de Alerta
                                                     </Button>
-                                                    <Button fullWidth className='hover-white bg-teal mt-1' variant="contained" color="success" href={process.env.PUBLIC_URL + `/informacion/${row.id}`} startIcon={<NotificationsActive />}>
+                                                    {/* <Button fullWidth className='hover-white bg-teal mt-1' variant="contained" color="success" href={process.env.PUBLIC_URL + `/informacion/${row.id}`} startIcon={<NotificationsActive />}>
                                                         Brindar Información
-                                                    </Button>
+                                                    </Button> */}
                                                 </Box>
 
                                             </CardActions>
-                                            <CardActions className='text-center'>
+                                            {/* <CardActions className='text-center'>
                                                 <Grid container>
                                                     <Grid item xs={5}>
                                                     </Grid>
@@ -152,38 +151,12 @@ function DesaparecidoDisabledExample() {
                                                         />
                                                     </Grid>
                                                 </Grid>
-                                            </CardActions>
+                                            </CardActions> */}
                                         </Card>
                                     </Grid>
                                 );
                             })}
                     </Grid>
-
-                    {/* <Card
-                        sx={{
-                            backgroundColor: '#4CAF50',
-                            borderRadius: '8px',
-                            color: '#fff',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            minHeight: '5px', // Para evitar que el contenedor se colapse cuando no hay suficientes elementos
-                        }}
-                    >
-                        <CardActions>
-                            <TablePagination
-                                rowsPerPageOptions={[15, 30, 60]}
-                                component="div"
-                                count={state.totalElements}
-                                rowsPerPage={state.rowsPerPage}
-                                page={state.page}
-                                onPageChange={onPageChange}
-                                onRowsPerPageChange={onRowsPerPageChange}
-                            />
-                        </CardActions>
-                    </Card> */}
-
-
                     <CardActions sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <TablePagination
                             rowsPerPageOptions={[15, 30, 60]}
@@ -209,4 +182,4 @@ function DesaparecidoDisabledExample() {
     );
 }
 
-export default DesaparecidoDisabledExample;
+export default UbicadoDisabledExample;

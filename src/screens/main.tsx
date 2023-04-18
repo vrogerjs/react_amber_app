@@ -58,7 +58,7 @@ function MainDisabledExample() {
             <Container maxWidth="lg">
                 <Card className='mt-4' sx={{backgroundColor:'#FFCDD2'}}>
                     <Grid container>
-                        <Grid item xs={12} sm={12} md={3}>
+                        <Grid item xs={12} sm={3} md={3}>
                             <CardMedia
                                 component="img"
                                 sx={{ width: 200, height: 200, margin: 'auto' }}
@@ -66,7 +66,7 @@ function MainDisabledExample() {
                                 alt="Silueta de niña"
                             />
                         </Grid>
-                        <Grid item xs={12} sm={12} md={6} className='text-center mt-4'>
+                        <Grid item xs={12} sm={6} md={6} className='text-center mt-4'>
                             <Typography component="div" variant="h4" sx={{ fontWeight: 'bold' }}>
                                 PERSONAS DESAPARECIDAS
                             </Typography>
@@ -77,7 +77,7 @@ function MainDisabledExample() {
                                 CLICK AQUÍ
                             </Button>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={3}>
+                        <Grid item xs={12} sm={3} md={3}>
                             <CardMedia
                                 component="img"
                                 sx={{ width: 200, height: 200, margin: 'auto' }}
@@ -90,7 +90,7 @@ function MainDisabledExample() {
 
                 <Card className='mt-4' sx={{backgroundColor:'#C8E6C9'}}>
                     <Grid container>
-                        <Grid item xs={12} sm={12} md={3}>
+                        <Grid item xs={12} sm={3} md={3}>
                             <CardMedia
                                 component="img"
                                 sx={{ width: 200, height: 200, margin: 'auto' }}
@@ -98,7 +98,7 @@ function MainDisabledExample() {
                                 alt="Silueta de niña"
                             />
                         </Grid>
-                        <Grid item xs={12} sm={12} md={6} className='text-center mt-4'>
+                        <Grid item xs={12} sm={6} md={6} className='text-center mt-4'>
                             <Typography component="div" variant="h4" sx={{ fontWeight: 'bold' }}>
                                 PERSONAS UBICADAS
                             </Typography>
@@ -109,7 +109,7 @@ function MainDisabledExample() {
                                 CLICK AQUÍ
                             </Button>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={3}>
+                        <Grid item xs={12} sm={3} md={3}>
                             <CardMedia
                                 component="img"
                                 sx={{ width: 200, height: 200, margin: 'auto' }}

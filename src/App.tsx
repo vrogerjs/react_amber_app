@@ -11,6 +11,7 @@ import VideoDisabledExample from './screens/video';
 import AlertaDisabledExample from './screens/alerta';
 import InformacionDisabledExample from './screens/informacion';
 import DesaparecidoDisabledExample from './screens/desaparecido';
+import UbicadoDisabledExample from './screens/ubicado';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -313,6 +314,7 @@ function App() {
             <Route path={`/search`} element={<SearchDisabledExample />} />
             <Route path={`/video`} element={<VideoDisabledExample />} />
             <Route path={`/desaparecido`} element={<DesaparecidoDisabledExample />} />
+            <Route path={`/ubicado`} element={<UbicadoDisabledExample />} />
             <Route path={`/alerta/:id`} element={<AlertaDisabledExample />} />
             <Route path={`/informacion/:id`} element={<InformacionDisabledExample />} />
           </Routes>
