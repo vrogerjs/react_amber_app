@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Box from '@mui/material/Box';
-import { Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent } from '@mui/material';
+import { Box, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useFormState, useResize, http } from 'gra-react-utils';
@@ -26,7 +25,7 @@ function AlertaDisabledExample() {
 
     const [o, { defaultProps, handleChange, bindEvents, validate, set }] = useFormState(useState, {
 
-    }, {});
+    });
 
     const onSubmit = data => console.log(data);
 
@@ -42,7 +41,7 @@ function AlertaDisabledExample() {
 
     useEffect(() => {
         if (id) {
-            http.get(process.env.REACT_APP_PATH + '/desaparecido/' + id).then((result) => {
+            http.get(import.meta.env.VITE_APP_PATH + '/desaparecido/' + id).then((result) => {
                 set(result);
                 set(o => ({ ...o, nroDenuncia: result.nroDenuncia }));
                 set(o => ({ ...o, regPolicial: result.dependencia.name }));
@@ -79,7 +78,7 @@ function AlertaDisabledExample() {
     }, [id]);
 
     const fetchData = async () => {
-        const result = await (http.get(process.env.REACT_APP_PATH + '/desaparecido/' + id));
+        const result = await (http.get(import.meta.env.VITE_APP_PATH + '/desaparecido/' + id));
         if (result !== '') {
             console.log(result);
             setDesaparecidos(result);
@@ -163,7 +162,7 @@ function AlertaDisabledExample() {
                             <CardMedia
                                 component="img"
                                 sx={{ height: '200px', width: '200px', margin: 'auto' }}
-                                image={process.env.PUBLIC_URL + "/little-boy.jpg"}
+                                image={import.meta.env.VITE_PUBLIC_URL + "/little-boy.jpg"}
                                 alt="Busqueda SISGEDO."
                             />
                         </Grid>

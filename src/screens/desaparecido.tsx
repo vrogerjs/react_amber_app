@@ -1,6 +1,5 @@
 import React, { useEffect, createRef, useState } from 'react';
-import Box from '@mui/material/Box';
-import { Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent, TablePagination } from '@mui/material';
+import { Box, Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent, TablePagination } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useResize, http } from 'gra-react-utils';
@@ -9,6 +8,7 @@ import { FileCopy, NotificationsActive, Send as SendIcon } from '@mui/icons-mate
 import TextField from '@mui/material/TextField';
 import { useDispatch } from "react-redux";
 import Alert from '@mui/material/Alert';
+import MapWrapper from './MapWrapper'
 
 function DesaparecidoDisabledExample() {
 
@@ -55,7 +55,7 @@ function DesaparecidoDisabledExample() {
 
     const fetchData = async (page) => {
         var data = { data: [], size: 0 };
-        const result = await (http.get(process.env.REACT_APP_PATH + '/desaparecido/' + page + '/' + state.rowsPerPage + '?estado=0'));
+        const result = await (http.get(import.meta.env.VITE_APP_PATH + '/desaparecido/' + page + '/' + state.rowsPerPage + '?estado=0'));
         if (result !== '') {
             data.size = result.size;
             state.totalElements = result.totalElements;
@@ -105,10 +105,10 @@ function DesaparecidoDisabledExample() {
                                                     alt="Foto"
                                                     height={'200px'}
                                                     width={'150px'}
-                                                    src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (process.env.PUBLIC_URL + "/male-female.jpg")}
+                                                    src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (import.meta.env.VITE_PUBLIC_URL + "/male-female.jpg")}
                                                     style={{ display: 'block', margin: '0 auto' }}
                                                 />
-                                                {/* <img alt="Foto" height={'200px'} width={'150px'} src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (process.env.PUBLIC_URL + "/male-female.jpg")} /> */}
+                                                {/* <img alt="Foto" height={'200px'} width={'150px'} src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (import.meta.env.VITE_PUBLIC_URL + "/male-female.jpg")} /> */}
                                                 <CardContent>
                                                     <Typography gutterBottom component="div" textAlign={'center'} fontSize={'20px'} fontWeight={'bold'}>
                                                         {row.persona.apePaterno} {row.persona.apeMaterno} {row.persona.nombres}
@@ -121,11 +121,17 @@ function DesaparecidoDisabledExample() {
                                                 </CardContent>
                                             </CardActionArea>
                                             <CardActions className='pl-6'>
+                                                <Grid item xs={12} md={12}>
+                                                    <MapWrapper
+                                                        location={[row.longitud ? row.longitud : -77.52888423325149, row.latitud ? row.latitud : -9.529897122270743]}
+                                                        features={[]} onChange={(e:any) => {console.log(e)}} />
+                                                </Grid>
+
                                                 <Box sx={{ width: '100%' }}>
-                                                    <Button fullWidth className='hover-white mb-1' variant="contained" color="error" href={process.env.PUBLIC_URL + `/alerta/${row.id}`} startIcon={<FileCopy />}>
+                                                    <Button fullWidth className='hover-white mb-1' variant="contained" color="error" href={import.meta.env.VITE_PUBLIC_URL + `/alerta/${row.id}`} startIcon={<FileCopy />}>
                                                         Nota de Alerta
                                                     </Button>
-                                                    <Button fullWidth className='hover-white bg-teal mt-1' variant="contained" color="success" href={process.env.PUBLIC_URL + `/informacion/${row.id}`} startIcon={<NotificationsActive />}>
+                                                    <Button fullWidth className='hover-white bg-teal mt-1' variant="contained" color="success" href={import.meta.env.VITE_PUBLIC_URL + `/informacion/${row.id}`} startIcon={<NotificationsActive />}>
                                                         Brindar Información
                                                     </Button>
                                                 </Box>
@@ -139,7 +145,7 @@ function DesaparecidoDisabledExample() {
                                                         <CardMedia
                                                             component="img"
                                                             sx={{ height: '70', width: '70', margin: 'auto', borderRadius: '5px' }}
-                                                            image={process.env.PUBLIC_URL + "/whatsap.png"}
+                                                            image={import.meta.env.VITE_PUBLIC_URL + "/whatsap.png"}
                                                             alt="Busqueda SISGEDO."
                                                         />
                                                     </Grid>
@@ -147,7 +153,7 @@ function DesaparecidoDisabledExample() {
                                                         <CardMedia
                                                             component="img"
                                                             sx={{ height: '70', width: '70', margin: 'auto', borderRadius: '5px', border: '1px solid #009688', marginLeft: '5px' }}
-                                                            image={process.env.PUBLIC_URL + "/phone.jpg"}
+                                                            image={import.meta.env.VITE_PUBLIC_URL + "/phone.jpg"}
                                                             alt="Busqueda SISGEDO."
                                                         />
                                                     </Grid>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import { TextField, Button, Grid, CardContent, Paper } from '@mui/material';
+import { Box, TextField, Button, Grid, CardContent, Paper } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -30,7 +29,7 @@ function MainDisabledExample() {
 
     const [o, { defaultProps }] = useFormState(useState, {
 
-    }, {});
+    });
 
     const { width, height } = useResize(React);
 
@@ -46,7 +45,7 @@ function MainDisabledExample() {
 
     const onClickBuscar = () => {
         if (o.nrodocumento.length > 7) {
-            http.get(process.env.REACT_APP_PATH + '/atencion/search/' + o.nrodocumento).then(result => {
+            http.get(import.meta.env.VITE_APP_PATH + '/atencion/search/' + o.nrodocumento).then(result => {
                 if (result.length > 0) {
                     setDatos(result);
                 } else {
@@ -127,7 +126,7 @@ function MainDisabledExample() {
                                             sx={{ fontWeight: 'bold' }}
                                             className='mt-4 bg-teal hover-white'
                                             fullWidth
-                                            href={process.env.PUBLIC_URL}
+                                            href={import.meta.env.VITE_PUBLIC_URL}
                                             variant="contained" color="primary"
                                             endIcon={<ReplyAll />}>
                                             Atras

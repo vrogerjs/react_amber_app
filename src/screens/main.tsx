@@ -1,5 +1,4 @@
 import React, { useEffect, createRef, useState } from 'react';
-import Box from '@mui/material/Box';
 import { Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -33,7 +32,7 @@ function MainDisabledExample() {
     }, []);
 
     const fetchData = async () => {
-        const result = await (http.get(process.env.REACT_APP_PATH + '/desaparecido'));
+        const result = await (http.get(  import.meta.env.VITE_APP_PATH + '/desaparecido'));
         if (result !== '') {
             setDesaparecidos(result);
         }
@@ -62,7 +61,7 @@ function MainDisabledExample() {
                             <CardMedia
                                 component="img"
                                 sx={{ width: 200, height: 200, margin: 'auto' }}
-                                image={process.env.PUBLIC_URL + "/little-boy.png"}
+                                image={import.meta.env.VITE_PUBLIC_URL + "/little-boy.png"}
                                 alt="Silueta de niña"
                             />
                         </Grid>
@@ -73,7 +72,7 @@ function MainDisabledExample() {
                             <Typography variant="subtitle1" color="text.secondary" component="div" sx={{ fontWeight: 'bold' }} className='mt-1'>
                                 CONOCE LA LISTA DE PERSONAS DESAPARECIDAS DE 0 A 17 AÑOS
                             </Typography>
-                            <Button className='hover-white bg-teal mt-1' variant="contained" color="success" href={process.env.PUBLIC_URL + "/desaparecido"} startIcon={<SendIcon />}>
+                            <Button className='hover-white bg-teal mt-1' variant="contained" color="success" href={import.meta.env.VITE_PUBLIC_URL + "/desaparecido"} startIcon={<SendIcon />}>
                                 CLICK AQUÍ
                             </Button>
                         </Grid>
@@ -81,7 +80,7 @@ function MainDisabledExample() {
                             <CardMedia
                                 component="img"
                                 sx={{ width: 200, height: 200, margin: 'auto' }}
-                                image={process.env.PUBLIC_URL + "/little-girl.png"}
+                                image={import.meta.env.VITE_PUBLIC_URL + "/little-girl.png"}
                                 alt="Silueta de niña"
                             />
                         </Grid>
@@ -94,7 +93,7 @@ function MainDisabledExample() {
                             <CardMedia
                                 component="img"
                                 sx={{ width: 200, height: 200, margin: 'auto' }}
-                                image={process.env.PUBLIC_URL + "/little-boy.png"}
+                                image={import.meta.env.VITE_PUBLIC_URL + "/little-boy.png"}
                                 alt="Silueta de niña"
                             />
                         </Grid>
@@ -105,7 +104,7 @@ function MainDisabledExample() {
                             <Typography variant="subtitle1" color="text.secondary" component="div" sx={{ fontWeight: 'bold' }} className='mt-1'>
                                 CONOCE LA LISTA DE PERSONAS UBICADAS DE 0 A 17 AÑOS
                             </Typography>
-                            <Button className='hover-white bg-teal mt-1' variant="contained" color="success" href={process.env.PUBLIC_URL + "/encontrado"} startIcon={<SendIcon />}>
+                            <Button className='hover-white bg-teal mt-1' variant="contained" color="success" href={import.meta.env.VITE_PUBLIC_URL + "/encontrado"} startIcon={<SendIcon />}>
                                 CLICK AQUÍ
                             </Button>
                         </Grid>
@@ -113,7 +112,7 @@ function MainDisabledExample() {
                             <CardMedia
                                 component="img"
                                 sx={{ width: 200, height: 200, margin: 'auto' }}
-                                image={process.env.PUBLIC_URL + "/little-girl.png"}
+                                image={import.meta.env.VITE_PUBLIC_URL + "/little-girl.png"}
                                 alt="Silueta de niña"
                             />
                         </Grid>

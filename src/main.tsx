@@ -1,8 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { useSelector, useDispatch } from "react-redux";
@@ -11,9 +10,10 @@ import {
 } from '@mui/material';
 import { http } from 'gra-react-utils';
 
-http.baseURL = process.env.REACT_APP_BASE_URL;
 
-function counterReducer(state = {title:'',networkStatus:{},drawer:false, url:null,load: false, snack: null, cb: null, dialog: null, result: null }, action) {
+http.baseURL = import.meta.env.VITE_APP_BASE_URL;
+
+function counterReducer(state:any = {title:'',networkStatus:{},drawer:false, url:null,load: false, snack: null, cb: null, dialog: null, result: null }, action:any) {
 
   switch (action.type) {
     case 'alert':
@@ -62,16 +62,11 @@ function VBackdrop() {
 }
 
 
-root.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<App />
-			<VBackdrop />
-		</Provider>
-	</React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+  <Provider store={store}>
+    <App />
+    <VBackdrop />
+  </Provider>
+</React.StrictMode>,
+)

@@ -1,15 +1,10 @@
 import React, { useState, useEffect, createRef } from 'react';
-import Box from '@mui/material/Box';
-import { TextField, MenuItem, Paper, Button, Grid, CardContent, SelectChangeEvent, Alert } from '@mui/material';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import InputAdornment from '@mui/material/InputAdornment';
+import { Box, Card, Container, InputAdornment, Typography, Stack, 
+	TextField, MenuItem, Paper, Button, Grid, CardContent, SelectChangeEvent, Alert } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useFormState, useResize, http } from 'gra-react-utils';
 import { useDispatch } from "react-redux";
-import Card from '@mui/material/Card';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
@@ -41,10 +36,10 @@ function FormDisabledExample() {
 		persona: null,
 		tipoPersona: 'Persona Natural',
 		tipoDocumento: 'DNI'
-	}, {});
+	});
 
 	const [p] = useFormState(useState, {
-	}, {});
+	});
 
 	const { width, height } = useResize(React);
 
@@ -80,7 +75,7 @@ function FormDisabledExample() {
 	const onKeyUp = (e: any) => {
 		if (o.tipoDocumento == 'DNI' && o.tipoPersona == 'Persona Natural') {
 			if (o.nroDocumento.length == 8) {
-				http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(result => {
+				http.get(import.meta.env.VITE_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(result => {
 					if (result) {
 						set(o => ({ ...o, celular: result.celular }));
 						set(o => ({ ...o, apellidoNombre: result.apellidoNombre }));
@@ -111,7 +106,7 @@ function FormDisabledExample() {
 
 		if (o.tipoDocumento == 'RUC' && o.tipoPersona == 'Persona Jurídica') {
 			if (o.nroDocumento.length == 11) {
-				http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(result => {
+				http.get(import.meta.env.VITE_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(result => {
 					if (result) {
 						set(o => ({ ...o, razonSocial: result.razonSocial }));
 						set(o => ({ ...o, celular: result.celular }));
@@ -154,7 +149,7 @@ function FormDisabledExample() {
 	const onChangeDia = (e: SelectChangeEvent<HTMLInputElement>) => {
 		o.dia = e.target.value;
 		set(o => ({ ...o, dia: e.target.value }));
-		http.get(process.env.REACT_APP_PATH + '/cronograma/fechaDisponible/' + p.dependencia + '?dia=' + o.dia).then(result => {
+		http.get(import.meta.env.VITE_APP_PATH + '/cronograma/fechaDisponible/' + p.dependencia + '?dia=' + o.dia).then(result => {
 			setDates(result.times);
 			var d = result.dependency;
 			set(o => ({ ...o, dependencia_id: d }));
@@ -164,19 +159,19 @@ function FormDisabledExample() {
 	const onClickSave = async () => {
 		const form = formRef.current;
 		if (1 || form != null && validate(form)) {
-			http.get(process.env.REACT_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(async result => {
+			http.get(import.meta.env.VITE_APP_PATH + '/persona/nrodoc/' + o.nroDocumento).then(async result => {
 				if (result) {
 					var p = result.id;
 					o.persona = { id: p };
 				} else {
-					await http.post(process.env.REACT_APP_PATH + '/persona', o).then((result) => {
+					await http.post(import.meta.env.VITE_APP_PATH + '/persona', o).then((result) => {
 						if (result) {
 							o.persona = { id: result.id };
 						}
 					});
 				}
 
-				http.post(process.env.REACT_APP_PATH + '/atencion', { ...o, dependencia: { id: o.dependencia_id } }).then(async (result) => {
+				http.post(import.meta.env.VITE_APP_PATH + '/atencion', { ...o, dependencia: { id: o.dependencia_id } }).then(async (result) => {
 					if (result) {
 						dispatch({ type: "snack", msg: 'Registro grabado!' });
 						set(o => ({}));
@@ -197,7 +192,7 @@ function FormDisabledExample() {
 			set(o => ({ ...o, dependencia: e.target.value }));
 			var dep = dependencias.find((e) => o.dependencia == e.id);
 			p.dependencia = dep.name;
-			http.get(process.env.REACT_APP_PATH + '/cronograma/dependencia/' + o.dependencia).then(response => {
+			http.get(import.meta.env.VITE_APP_PATH + '/cronograma/dependencia/' + o.dependencia).then(response => {
 				if (response) {
 					o.dia = '';
 					o.horaIni = '';
@@ -216,7 +211,7 @@ function FormDisabledExample() {
 	}, []);
 
 	const fetchData = async () => {
-		const result = await (http.get(process.env.REACT_APP_PATH + '/dependencia'));
+		const result = await (http.get(import.meta.env.VITE_APP_PATH + '/dependencia'));
 		if (result != '') {
 			setDependencias(result);
 		}
@@ -263,7 +258,7 @@ function FormDisabledExample() {
 											sx={{ fontWeight: 'bold' }}
 											className='bg-teal mt-3 hover-white'
 											fullWidth
-											href={process.env.PUBLIC_URL}
+											href={import.meta.env.VITE_PUBLIC_URL}
 											variant="contained" color="primary"
 											endIcon={<ReplyAll />}>
 											Atras

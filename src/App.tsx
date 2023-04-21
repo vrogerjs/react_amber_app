@@ -171,7 +171,7 @@ function App() {
                     paddingBottom: 2,
                   }}
                   alt="Logo del GORE Áncash."
-                  src={process.env.PUBLIC_URL + "/logogore.png"}
+                  src={import.meta.env.VITE_PUBLIC_URL + "/logogore.png"}
                 />
               </Grid>
 
@@ -197,7 +197,7 @@ function App() {
                     paddingBottom: 1,
                   }}
                   alt="Escudo del Perú."
-                  src={process.env.PUBLIC_URL + "/logoperu.png"}
+                  src={import.meta.env.VITE_PUBLIC_URL + "/logoperu.png"}
                 />
               </Grid>
 
@@ -241,7 +241,7 @@ function App() {
                   >
                     {pages.map((page) => (
                       <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center"><Link href={process.env.PUBLIC_URL + "/register"}>{page}</Link></Typography>
+                        <Typography textAlign="center"><Link href={import.meta.env.VITE_PUBLIC_URL + "/register"}>{page}</Link></Typography>
                       </MenuItem>
                     ))}
                   </Menu>
@@ -265,28 +265,28 @@ function App() {
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                   <Button
                     key='HOME'
-                    href={process.env.PUBLIC_URL + "/"}
+                    href={import.meta.env.VITE_PUBLIC_URL + "/"}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     HOME
                   </Button>
                   <Button
                     key='DESAPARECIDOS'
-                    href={process.env.PUBLIC_URL + "/desaparecido"}
+                    href={import.meta.env.VITE_PUBLIC_URL + "/desaparecido"}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     DESAPARECIDOS
                   </Button>
                   <Button
                     key='UBICADOS'
-                    href={process.env.PUBLIC_URL + "/ubicado"}
+                    href={import.meta.env.VITE_PUBLIC_URL + "/ubicado"}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     UBICADOS
                   </Button>
                   <Button
                     key='COMO DENUNCIAR?'
-                    href={process.env.PUBLIC_URL + "/denuncia"}
+                    href={import.meta.env.VITE_PUBLIC_URL + "/denuncia"}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     COMO DENUNCIAR?
@@ -307,7 +307,7 @@ function App() {
         </Container>
 
 
-        <Router basename={process.env.PUBLIC_URL}>
+        <Router basename={import.meta.env.VITE_PUBLIC_URL}>
           <Routes>
             <Route path={`/`} element={<MainDisabledExample />} />
             <Route path={`/register`} element={<FormDisabledExample />} />

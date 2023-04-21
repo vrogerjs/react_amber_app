@@ -1,7 +1,5 @@
 import React, { useEffect, createRef, useState } from 'react';
-import Box from '@mui/material/Box';
-import { Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent, InputAdornment } from '@mui/material';
-import Container from '@mui/material/Container';
+import { Box, Paper, Button, Container, Grid, CardActionArea, CardActions, CardMedia, CardContent, InputAdornment } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useResize, http, useFormState } from 'gra-react-utils';
 import Card from '@mui/material/Card';
@@ -26,7 +24,7 @@ function DesaparecidoDisabledExample() {
 
     const [o, { defaultProps, set, validate }] = useFormState(useState, {
 
-    }, {});
+    });
 
     useEffect(() => {
 
@@ -40,7 +38,7 @@ function DesaparecidoDisabledExample() {
 
     useEffect(() => {
         if (id) {
-            http.get(process.env.REACT_APP_PATH + '/desaparecido/' + id).then((result) => {
+            http.get(import.meta.env.VITE_APP_PATH + '/desaparecido/' + id).then((result) => {
                 set(result);
                 set(o => ({ ...o, id: result.id }));
                 set(o => ({ ...o, nroDenuncia: result.nroDenuncia }));
@@ -99,7 +97,7 @@ function DesaparecidoDisabledExample() {
     const onClickSave = async () => {
         const form = formRef.current;
         if (1 || form != null && validate(form)) {
-            http.post(process.env.REACT_APP_PATH + '/informacion', { dni: o.nroDocumento, apeNombres: o.apellidoNombre, descripcion: o.descripcion, desaparecido: { id: o.id } }).then(async (result) => {
+            http.post(import.meta.env.VITE_APP_PATH + '/informacion', { dni: o.nroDocumento, apeNombres: o.apellidoNombre, descripcion: o.descripcion, desaparecido: { id: o.id } }).then(async (result) => {
                 if (result) {
                     dispatch({ type: "snack", msg: 'Información enviada con éxito.!' });
                     set(o => ({}));
@@ -155,7 +153,7 @@ function DesaparecidoDisabledExample() {
                                         <CardMedia
                                             component="img"
                                             sx={{ width: 200, height: 200, margin: 'auto' }}
-                                            image={process.env.PUBLIC_URL + "/little-boy.png"}
+                                            image={import.meta.env.VITE_PUBLIC_URL + "/little-boy.png"}
                                             alt="Busqueda SISGEDO."
                                         />
                                         <CardContent>
@@ -172,7 +170,7 @@ function DesaparecidoDisabledExample() {
                                     </CardActionArea>
                                     <CardActions className='pl-6'>
                                         <Box sx={{ width: '100%' }}>
-                                            <Button fullWidth className='hover-white mb-1' variant="contained" color="error" href={process.env.PUBLIC_URL + `/alerta/${o.id}`} startIcon={<FileCopy />}>
+                                            <Button fullWidth className='hover-white mb-1' variant="contained" color="error" href={import.meta.env.VITE_PUBLIC_URL + `/alerta/${o.id}`} startIcon={<FileCopy />}>
                                                 Nota de Alerta
                                             </Button>
                                         </Box>
@@ -186,7 +184,7 @@ function DesaparecidoDisabledExample() {
                                                 <CardMedia
                                                     component="img"
                                                     sx={{ height: '70', width: '70', margin: 'auto', borderRadius: '5px' }}
-                                                    image={process.env.PUBLIC_URL + "/whatsap.png"}
+                                                    image={import.meta.env.VITE_PUBLIC_URL + "/whatsap.png"}
                                                     alt="Busqueda SISGEDO."
                                                 />
                                             </Grid>
@@ -194,7 +192,7 @@ function DesaparecidoDisabledExample() {
                                                 <CardMedia
                                                     component="img"
                                                     sx={{ height: '70', width: '70', margin: 'auto', borderRadius: '5px', border: '1px solid #009688', marginLeft: '5px' }}
-                                                    image={process.env.PUBLIC_URL + "/phone.jpg"}
+                                                    image={import.meta.env.VITE_PUBLIC_URL + "/phone.jpg"}
                                                     alt="Busqueda SISGEDO."
                                                 />
                                             </Grid>

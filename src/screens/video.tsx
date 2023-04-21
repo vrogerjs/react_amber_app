@@ -1,8 +1,5 @@
 import React, { useEffect, createRef } from 'react';
-import Box from '@mui/material/Box';
-import { Paper, Button, Grid, CardActions, CardContent } from '@mui/material';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Box, Paper, Button, Grid, CardActions, CardContent, Container, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useResize } from 'gra-react-utils';
@@ -60,7 +57,7 @@ function MainDisabledExample() {
                                                 sx={{ fontWeight: 'bold' }}
                                                 className='bg-teal hover-white'
                                                 fullWidth
-                                                href={process.env.PUBLIC_URL}
+                                                href={import.meta.env.VITE_PUBLIC_URL}
                                                 variant="contained" color="primary"
                                                 endIcon={<ReplyAll />}>
                                                 Atras
