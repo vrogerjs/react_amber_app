@@ -1,13 +1,11 @@
-import React, { useEffect, createRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Button, Grid, CardActionArea, CardActions, CardContent, TablePagination } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useResize, http } from 'gra-react-utils';
 import Card from '@mui/material/Card';
-import { FileCopy, Send as SendIcon } from '@mui/icons-material';
+import { FileCopy } from '@mui/icons-material';
 
 function UbicadoDisabledExample() {
-
-    const formRef: any = createRef();
 
     const { width, height } = useResize(React);
 
@@ -17,8 +15,8 @@ function UbicadoDisabledExample() {
 
     useEffect(() => {
 
-        let header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
-        let paper: HTMLElement | null = document.querySelector('.page');
+        const header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
+        const paper: HTMLElement | null = document.querySelector('.page');
         if (header && paper) {
             paper.style.height = (height - header.offsetHeight) + 'px';
         }
@@ -28,13 +26,13 @@ function UbicadoDisabledExample() {
     const emptyRows = result.data && result.data.length;
 
     const onPageChange = (
-        event, page
+        page:any
     ) => {
         setState({ ...state, page: page });
     };
 
     const onRowsPerPageChange = (
-        event
+        event:any
     ) => {
         setState({ ...state, rowsPerPage: event.target.value });
     };
@@ -43,7 +41,7 @@ function UbicadoDisabledExample() {
         fetchData(state.page)
     }, [state.page, state.rowsPerPage]);
 
-    const fetchData = async (page) => {
+    const fetchData = async (page:any) => {
         const data = { data: [], size: 0 };
         const result = await (http.get(import.meta.env.VITE_APP_PATH + '/desaparecido/' + page + '/' + state.rowsPerPage + '?estado=1'));
         if (result !== '') {
@@ -54,7 +52,7 @@ function UbicadoDisabledExample() {
         setResult(data);
     };
 
-    function fechaHora(timestamp) {
+    function fechaHora(timestamp:any) {
         const fecha = new Date(timestamp);
         const dia = fecha.getDate().toString().padStart(2, '0');
         const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
@@ -76,7 +74,7 @@ function UbicadoDisabledExample() {
                 </Typography>
                 <Grid container>
                     {(result && result.data && result.data.length ? result.data : [])
-                        .map((row: any, index) => {
+                        .map((row: any) => {
                             return (
                                 <Grid item xs={12} sm={6} md={4} className='p-3' key={row.id}>
                                     <Card sx={{ backgroundColor: '#E0E0E0' }}>

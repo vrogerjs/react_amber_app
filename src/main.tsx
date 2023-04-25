@@ -40,11 +40,11 @@ function counterReducer(state:any = {title:'',networkStatus:{},drawer:false, url
   }
 }
 
-let store = createStore(counterReducer)
+const store = createStore(counterReducer)
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+// const root = ReactDOM.createRoot(
+//   document.getElementById('root') as HTMLElement
+// );
 
 function VBackdrop() {
 
@@ -52,7 +52,7 @@ function VBackdrop() {
 
   const dispatch = useDispatch();
 
-  http.loadingMask = (show) => {
+  http.loadingMask = (show:any) => {
     dispatch({ type: 'load', show: show });
   };
   return <Backdrop style={{ zIndex: 100000 }}

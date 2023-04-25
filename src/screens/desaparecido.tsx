@@ -1,18 +1,13 @@
-import React, { useEffect, createRef, useState } from 'react';
-import { Box, Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent, TablePagination } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent, TablePagination } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useResize, http } from 'gra-react-utils';
 import Card from '@mui/material/Card';
-import { FileCopy, NotificationsActive, Send as SendIcon } from '@mui/icons-material';
-import TextField from '@mui/material/TextField';
-import { useDispatch } from "react-redux";
-import Alert from '@mui/material/Alert';
+import { FileCopy, NotificationsActive } from '@mui/icons-material';
 import MapWrapper from './MapWrapper'
 
 function DesaparecidoDisabledExample() {
-
-    const formRef: any = createRef();
 
     const { width, height } = useResize(React);
 
@@ -22,8 +17,8 @@ function DesaparecidoDisabledExample() {
 
     useEffect(() => {
 
-        let header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
-        let paper: HTMLElement | null = document.querySelector('.page');
+        const header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
+        const paper: HTMLElement | null = document.querySelector('.page');
         if (header && paper) {
             paper.style.height = (height - header.offsetHeight) + 'px';
         }
@@ -33,13 +28,13 @@ function DesaparecidoDisabledExample() {
     const emptyRows = result.data && result.data.length;
 
     const onPageChange = (
-        event, page
+       page:any
     ) => {
         setState({ ...state, page: page });
     };
 
     const onRowsPerPageChange = (
-        event
+        event:any
     ) => {
         setState({ ...state, rowsPerPage: event.target.value });
     };
@@ -48,8 +43,8 @@ function DesaparecidoDisabledExample() {
         fetchData(state.page)
     }, [state.page, state.rowsPerPage]);
 
-    const fetchData = async (page) => {
-        var data = { data: [], size: 0 };
+    const fetchData = async (page:any) => {
+        const data = { data: [], size: 0 };
         const result = await (http.get(import.meta.env.VITE_APP_PATH + '/desaparecido/' + page + '/' + state.rowsPerPage + '?estado=0'));
         if (result !== '') {
             data.size = result.size;
@@ -59,7 +54,7 @@ function DesaparecidoDisabledExample() {
         setResult(data);
     };
 
-    function fechaHora(timestamp) {
+    function fechaHora(timestamp:any) {
         const fecha = new Date(timestamp);
         const dia = fecha.getDate().toString().padStart(2, '0');
         const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
@@ -81,7 +76,7 @@ function DesaparecidoDisabledExample() {
                 </Typography>
                 <Grid container>
                     {(result && result.data && result.data.length ? result.data : [])
-                        .map((row: any, index) => {
+                        .map((row: any) => {
                             return (
                                 <Grid item xs={12} sm={6} md={4} className='p-3' key={row.id}>
                                     <Card sx={{ backgroundColor: '#E0E0E0' }}>

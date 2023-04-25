@@ -1,61 +1,27 @@
-import React, { useEffect, createRef, useState } from 'react';
-import { Paper, Button, Grid, CardActionArea, CardActions, CardMedia, CardContent } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Paper, Button, Grid, CardMedia } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import { useResize, http } from 'gra-react-utils';
+import { useResize } from 'gra-react-utils';
 import Card from '@mui/material/Card';
 import { Send as SendIcon } from '@mui/icons-material';
-import TextField from '@mui/material/TextField';
 
 function MainDisabledExample() {
 
-    const formRef: any = createRef();
-
     const { width, height } = useResize(React);
 
-    const [desaparecidos, setDesaparecidos] = useState([] as any);
-
     useEffect(() => {
-
-        let header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
-        let paper: HTMLElement | null = document.querySelector('.page');
+        const header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
+        const paper: HTMLElement | null = document.querySelector('.page');
         if (header && paper) {
             paper.style.height = (height - header.offsetHeight) + 'px';
         }
-
     }, [width, height]);
-
-    const onSubmit = data => console.log(data);
-
-    useEffect(() => {
-        fetchData()
-    }, []);
-
-    const fetchData = async () => {
-        const result = await (http.get(  import.meta.env.VITE_APP_PATH + '/desaparecido'));
-        if (result !== '') {
-            setDesaparecidos(result);
-        }
-    };
-
-    function fechaHora(timestamp) {
-        const fecha = new Date(timestamp);
-        const dia = fecha.getDate().toString().padStart(2, '0');
-        const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-        const anio = fecha.getFullYear();
-        let hora = fecha.getHours();
-        const minutos = fecha.getMinutes().toString().padStart(2, '0');
-        const segundos = fecha.getSeconds().toString().padStart(2, '0');
-        const amPm = hora >= 12 ? 'PM' : 'AM';
-        hora = hora % 12;
-        hora = hora ? hora : 12;
-        return `${dia}/${mes}/${anio}  ${hora}:${minutos}:${segundos} ${amPm}`;
-    }
 
     return (
         <Paper className="page color-plomo" style={{ overflow: 'auto' }}>
             <Container maxWidth="lg">
-                <Card className='mt-4' sx={{backgroundColor:'#FFCDD2'}}>
+                <Card className='mt-4' sx={{ backgroundColor: '#FFCDD2' }}>
                     <Grid container>
                         <Grid item xs={12} sm={3} md={3}>
                             <CardMedia
@@ -87,7 +53,7 @@ function MainDisabledExample() {
                     </Grid>
                 </Card>
 
-                <Card className='mt-4' sx={{backgroundColor:'#C8E6C9'}}>
+                <Card className='mt-4' sx={{ backgroundColor: '#C8E6C9' }}>
                     <Grid container>
                         <Grid item xs={12} sm={3} md={3}>
                             <CardMedia

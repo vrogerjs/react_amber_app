@@ -21,9 +21,6 @@ import {
   DialogContentText,
   DialogActions,
   Button,
-  FormControl,
-  FormLabel,
-  RadioGroup,
   Grid,
   Link
 } from '@mui/material';
@@ -46,7 +43,7 @@ function VDialog() {
 
   const dispatch = useDispatch();
 
-  function onClose(e) {
+  function onClose(e: any) {
     const el = e.target;
     let index;
     if (el.tagName === 'BUTTON')
@@ -69,7 +66,7 @@ function VDialog() {
       marginLeft: 'auto',
       marginRight: 'auto'
     }}>
-      {options.map((e, i) => (<Button key={i} onClick={onClose} autoFocus={i === options.length - 1}>{e}</Button>))}
+      {options.map((e: any, i: any) => (<Button key={i} onClick={onClose} autoFocus={i === options.length - 1}>{e}</Button>))}
     </DialogActions>
   </Dialog> : null
 
@@ -140,7 +137,7 @@ function App() {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
   };
 
@@ -148,7 +145,7 @@ function App() {
     setAnchorElNav(null);
   };
 
-  http.onError = (request) => {
+  http.onError = (request: any) => {
     console.log(request);
     // dispatch({ type: 'error', msg: ('<b>' + request.url + '</b><br/>' + request.error + '->' + request.message) });
   };
@@ -325,17 +322,17 @@ function App() {
   );
 }
 
-export function VRadioGroup({ children, error, label, value, ...other }) {
-  return <FormControl className={error ? 'error' : ''} >
-    <FormLabel id={other.name}>{label}</FormLabel>
-    <RadioGroup
-      aria-labelledby={other.name}
-      value={value}
-      {...other}
-    >
-      {children}
-    </RadioGroup>
-  </FormControl>;
-}
+// export function VRadioGroup({ children, error, label, value, ...other }) {
+//   return <FormControl className={error ? 'error' : ''} >
+//     <FormLabel id={other.name}>{label}</FormLabel>
+//     <RadioGroup
+//       aria-labelledby={other.name}
+//       value={value}
+//       {...other}
+//     >
+//       {children}
+//     </RadioGroup>
+//   </FormControl>;
+// }
 
 export default App;

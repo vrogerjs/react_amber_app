@@ -1,5 +1,5 @@
 // react
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // openlayers
 import Map from 'ol/Map'
@@ -24,17 +24,18 @@ function MapWrapper(props: any) {
     // const [featuresLayer, setFeaturesLayer] = useState()
     // const [selectedCoord, setSelectedCoord] = useState()
     const [selectedCoord, setSelectedCoord] = useState<Coordinate | undefined>(undefined);
-    const [map, setMap] = useState<Partial<{ key: string, value: string }> | undefined>(undefined);
+    // const [map, setMap] = useState<Partial<{ key: string, value: string }> | undefined>(undefined);
+    const [map, setMap] = useState<Partial<{ key: string, value: string }>>({});
+
     const [featuresLayer, setFeaturesLayer] = useState<VectorLayer<VectorSource<Geometry>> | undefined>(undefined);
     const mapElement = useRef<HTMLDivElement>(null);
-
 
     // pull refs
     // const mapElement = useRef()
 
     // create state ref that can be accessed in OpenLayers onclick callback function
     //  https://stackoverflow.com/a/60643670
-    const mapRef = useRef()
+    const mapRef = useRef<Partial<{ key: string; value: string; }>>({});
     mapRef.current = map;
 
     // initialize map on first render - logic formerly put into componentDidMount
@@ -50,17 +51,14 @@ function MapWrapper(props: any) {
                 source: new VectorSource()
             })
 
-            const onChange = props.onChange || (() => { });
-
-            console.log(props);
-
+            const onChange = props.onChange;
 
             const initialLocation = fromLonLat(props.location);
 
             // create map
 
             const initialMap = new Map({
-                target: mapElement.current,
+                target: mapElement.current || undefined,
                 layers: [
 
                     // USGS Topo
