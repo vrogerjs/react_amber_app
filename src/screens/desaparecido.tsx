@@ -100,7 +100,8 @@ function DesaparecidoDisabledExample() {
                                                     {fechaHora(row.fechaHoraHecho)}
                                                 </Typography>
                                                 <Grid item xs={12} md={12}>
-                                                    <MapWrapper location={[parseFloat(row.longitud), parseFloat(row.latitud)]} features={[]} />
+                                                    <MapWrapper location={[parseFloat(row.longitud), parseFloat(row.latitud)]} 
+                                                    features={[]} />
                                                 </Grid>
                                             </CardContent>
                                         </CardActionArea>

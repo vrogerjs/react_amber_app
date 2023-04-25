@@ -27,7 +27,7 @@ function MapWrapper(props: any) {
 
 
     const [featuresLayer, setFeaturesLayer] = useState<VectorLayer<VectorSource<Geometry>> | undefined>(undefined);
-    const mapElement = useRef<HTMLDivElement>(null);
+    const mapElement:any = useRef<HTMLDivElement>(null);
 
     // pull refs
     // const mapElement = useRef()
@@ -43,10 +43,12 @@ function MapWrapper(props: any) {
     // initialize map on first render - logic formerly put into componentDidMount
     useEffect(() => {
 
-        const viewport = document.querySelector('.ol-viewport');
+        const doc:any=mapElement.current.parentElement;
+
+        const viewport = doc.querySelector('.ol-viewport');
 
         if (!viewport) {
-            const marker_el: any = document.getElementById('marker');
+            const marker_el: any = doc.querySelector('.marker');
 
             // create and add vector source layer
             const initalFeaturesLayer = new VectorLayer({
@@ -102,8 +104,9 @@ function MapWrapper(props: any) {
                 },
             });
 
+            console.log('markerrrrrr .....');
             setMarker(marker);
-
+            console.log(marker);
             let dragPan: any;
             initialMap.getInteractions().forEach(function (interaction) {
                 if (interaction instanceof DragPan) {
@@ -189,7 +192,7 @@ function MapWrapper(props: any) {
             <div className="clicked-coord-label">
                 <p>{(selectedCoord) ? toStringXY(selectedCoord, 5) : ''}</p>
             </div>
-            <div id="marker" title="Marker"></div>
+            <div class="marker" title="Marker"></div>
             <div id="popup" className="ol-popup">
                 <a href="#" id="popup-closer" className="ol-popup-closer"></a>
                 <div id="popup-content"></div>
