@@ -18,14 +18,13 @@ import { Geometry } from 'ol/geom';
 
 function MapWrapper(props: any) {
 
-    // set intial state
-    // const [map, setMap] = useState()
     const [marker, setMarker] = useState<any>()
-    // const [featuresLayer, setFeaturesLayer] = useState()
-    // const [selectedCoord, setSelectedCoord] = useState()
     const [selectedCoord, setSelectedCoord] = useState<Coordinate | undefined>(undefined);
-    // const [map, setMap] = useState<Partial<{ key: string, value: string }> | undefined>(undefined);
-    const [map, setMap] = useState<Partial<{ key: string, value: string }>>({});
+    // const [map, setMap] = useState<Map<string, string>>(new Map());
+
+
+    const [map, setMap] = useState<Map | null>(null);
+
 
     const [featuresLayer, setFeaturesLayer] = useState<VectorLayer<VectorSource<Geometry>> | undefined>(undefined);
     const mapElement = useRef<HTMLDivElement>(null);
@@ -35,8 +34,11 @@ function MapWrapper(props: any) {
 
     // create state ref that can be accessed in OpenLayers onclick callback function
     //  https://stackoverflow.com/a/60643670
-    const mapRef = useRef<Partial<{ key: string; value: string; }>>({});
+    // const mapRef = useRef<Partial<{ key: string; value: string; }>>({});
+    const mapRef = useRef<Map | null>(null);
+
     mapRef.current = map;
+
 
     // initialize map on first render - logic formerly put into componentDidMount
     useEffect(() => {
@@ -86,7 +88,6 @@ function MapWrapper(props: any) {
                 }),
                 controls: []
             })
-
 
             const marker = new Overlay({
                 position: initialLocation,
@@ -169,7 +170,7 @@ function MapWrapper(props: any) {
                     })
                 )
             }
-            if (featuresLayer && featuresLayer.getSource()) {
+            if (map && featuresLayer && featuresLayer.getSource()) {
                 const source = featuresLayer.getSource();
                 if (source && source.getFeatures().length > 0) {
                     const extent = source.getExtent();
