@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { createRef } from 'react';
 import { Paper, Button, Grid, CardMedia } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -8,15 +8,18 @@ import { Send as SendIcon } from '@mui/icons-material';
 
 function MainDisabledExample() {
 
-    const { width, height } = useResize(React);
+    const formRef: any = createRef();
 
-    useEffect(() => {
-        const header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
-        const paper: HTMLElement | null = document.querySelector('.page');
-        if (header && paper) {
-            paper.style.height = (height - header.offsetHeight) + 'px';
+    const viewRef: any = createRef();
+
+     useResize(({ width, height }: any) => {
+        if (formRef.current) {
+            const [body, toolBar]: any = formRef.current.children;
+            toolBar.style.width = width + 'px';
+            body.style.height = (height - toolBar.offsetHeight) + 'px';
+            body.style.width = width + 'px';
         }
-    }, [width, height]);
+    }, viewRef);
 
     return (
         <Paper className="page color-plomo" style={{ overflow: 'auto' }}>

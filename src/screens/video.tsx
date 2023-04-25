@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { createRef } from 'react';
 import { Box, Paper, Button, Grid, CardActions, CardContent, Container, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -8,17 +8,18 @@ import { ReplyAll } from '@mui/icons-material';
 
 function MainDisabledExample() {
 
-    const { width, height } = useResize(React);
+    const formRef: any = createRef();
 
-    useEffect(() => {
+    const viewRef: any = createRef();
 
-        const header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
-        const paper: HTMLElement | null = document.querySelector('.page');
-        if (header && paper) {
-            paper.style.height = (height - header.offsetHeight) + 'px';
+    useResize(({ width, height }: any) => {
+        if (formRef.current) {
+            const [body, toolBar]: any = formRef.current.children;
+            toolBar.style.width = width + 'px';
+            body.style.height = (height - toolBar.offsetHeight) + 'px';
+            body.style.width = width + 'px';
         }
-
-    }, [width, height]);
+    }, viewRef);
 
     return (
         <Paper className="page color-plomo" style={{ overflow: 'auto' }}>

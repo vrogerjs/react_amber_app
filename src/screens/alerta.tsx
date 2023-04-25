@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, createRef } from 'react';
 import { Box, Button, Grid, CardContent } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useFormState, useResize, http } from 'gra-react-utils';
 import Card from '@mui/material/Card';
-import { FileDownload, Print} from '@mui/icons-material';
+import { FileDownload, Print } from '@mui/icons-material';
 import { useParams } from "react-router-dom";
 import Divider from '@mui/material/Divider';
 import { useReactToPrint } from 'react-to-print';
@@ -12,7 +12,10 @@ import { useDispatch } from "react-redux";
 
 function AlertaDisabledExample() {
 
-    const { width, height } = useResize(React);
+
+    const formRef: any = createRef();
+
+    const viewRef: any = createRef();
 
     const componentRef = useRef<HTMLDivElement>(null);
 
@@ -22,56 +25,55 @@ function AlertaDisabledExample() {
 
     const [o, { set }] = useFormState(useState, {});
 
-    useEffect(() => {
-
-        const header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
-        const paper: HTMLElement | null = document.querySelector('.page');
-        if (header && paper) {
-            paper.style.height = (height - header.offsetHeight) + 'px';
+    useResize(({ width, height }: any) => {
+        if (formRef.current) {
+            const [body, toolBar]: any = formRef.current.children;
+            toolBar.style.width = width + 'px';
+            body.style.height = (height - toolBar.offsetHeight) + 'px';
+            body.style.width = width + 'px';
         }
-
-    }, [width, height]);
+    }, viewRef);
 
     useEffect(() => {
         if (id) {
             http.get(import.meta.env.VITE_APP_PATH + '/desaparecido/' + id).then((result: any) => {
                 set(result);
-                set((o:any) => ({ ...o, nroDenuncia: result.nroDenuncia }));
-                set((o:any)  => ({ ...o, regPolicial: result.dependencia.name }));
-                set((o:any)  => ({ ...o, fechaHoraDenuncia: result.fechaHoraDenuncia }));
-                set((o:any)  => ({ ...o, fechaHoraHecho: result.fechaHoraHecho }));
-                set((o:any)  => ({ ...o, lugarHecho: result.lugarHecho }));
-                set((o:any)  => ({ ...o, tez: result.tez }));
-                set((o:any)  => ({ ...o, fenotipo: result.fenotipo }));
-                set((o:any)  => ({ ...o, ojos: result.ojos }));
-                set((o:any)  => ({ ...o, sangre: result.sangre }));
-                set((o:any)  => ({ ...o, boca: result.boca }));
-                set((o:any)  => ({ ...o, nariz: result.nariz }));
-                set((o:any)  => ({ ...o, cabello: result.cabello }));
-                set((o:any)  => ({ ...o, estatura: result.estatura }));
-                set((o:any)  => ({ ...o, contextura: result.contextura }));
-                set((o:any)  => ({ ...o, vestimenta: result.vestimenta }));
-                set((o:any)  => ({ ...o, circunstancia: result.circunstancia }));
-                set((o:any)  => ({ ...o, observacion: result.observacion }));
-                set((o:any)  => ({ ...o, nroContacto: result.nroContacto }));
-                set((o:any)  => ({ ...o, estado: result.estado }));
-                set((o:any)  => ({ ...o, dni: result.persona.dni }));
-                set((o:any)  => ({ ...o, nombres: result.persona.nombres }));
-                set((o:any)  => ({ ...o, apePaterno: result.persona.apePaterno }));
-                set((o:any)  => ({ ...o, apeMaterno: result.persona.apeMaterno }));
-                set((o:any)  => ({ ...o, direccion: result.persona.direccion }));
-                set((o:any)  => ({ ...o, fechaNacimiento: result.persona.fechaNacimiento }));
-                set((o:any)  => ({ ...o, sexo: result.persona.sexo }));
-                set((o:any)  => ({ ...o, estadoCivil: result.persona.estadoCivil }));
-                set((o:any)  => ({ ...o, foto: result.persona.foto }));
-                set((o:any)  => ({ ...o, distrito: result.distrito.distrito }));
-                set((o:any)  => ({ ...o, provincia: result.distrito.provincia.provincia }));
-                set((o:any)  => ({ ...o, departamento: result.distrito.provincia.departamento.departamento }));
+                set((o: any) => ({ ...o, nroDenuncia: result.nroDenuncia }));
+                set((o: any) => ({ ...o, regPolicial: result.dependencia.name }));
+                set((o: any) => ({ ...o, fechaHoraDenuncia: result.fechaHoraDenuncia }));
+                set((o: any) => ({ ...o, fechaHoraHecho: result.fechaHoraHecho }));
+                set((o: any) => ({ ...o, lugarHecho: result.lugarHecho }));
+                set((o: any) => ({ ...o, tez: result.tez }));
+                set((o: any) => ({ ...o, fenotipo: result.fenotipo }));
+                set((o: any) => ({ ...o, ojos: result.ojos }));
+                set((o: any) => ({ ...o, sangre: result.sangre }));
+                set((o: any) => ({ ...o, boca: result.boca }));
+                set((o: any) => ({ ...o, nariz: result.nariz }));
+                set((o: any) => ({ ...o, cabello: result.cabello }));
+                set((o: any) => ({ ...o, estatura: result.estatura }));
+                set((o: any) => ({ ...o, contextura: result.contextura }));
+                set((o: any) => ({ ...o, vestimenta: result.vestimenta }));
+                set((o: any) => ({ ...o, circunstancia: result.circunstancia }));
+                set((o: any) => ({ ...o, observacion: result.observacion }));
+                set((o: any) => ({ ...o, nroContacto: result.nroContacto }));
+                set((o: any) => ({ ...o, estado: result.estado }));
+                set((o: any) => ({ ...o, dni: result.persona.dni }));
+                set((o: any) => ({ ...o, nombres: result.persona.nombres }));
+                set((o: any) => ({ ...o, apePaterno: result.persona.apePaterno }));
+                set((o: any) => ({ ...o, apeMaterno: result.persona.apeMaterno }));
+                set((o: any) => ({ ...o, direccion: result.persona.direccion }));
+                set((o: any) => ({ ...o, fechaNacimiento: result.persona.fechaNacimiento }));
+                set((o: any) => ({ ...o, sexo: result.persona.sexo }));
+                set((o: any) => ({ ...o, estadoCivil: result.persona.estadoCivil }));
+                set((o: any) => ({ ...o, foto: result.persona.foto }));
+                set((o: any) => ({ ...o, distrito: result.distrito.distrito }));
+                set((o: any) => ({ ...o, provincia: result.distrito.provincia.provincia }));
+                set((o: any) => ({ ...o, departamento: result.distrito.provincia.departamento.departamento }));
             });
         }
     }, [id]);
 
-    function fechaHora(timestamp:any) {
+    function fechaHora(timestamp: any) {
         const fecha = new Date(timestamp);
         const dia = fecha.getDate().toString().padStart(2, '0');
         const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');

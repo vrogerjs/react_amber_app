@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, createRef } from 'react';
 import { Box, Container, Button, Grid, CardActionArea, CardActions, CardContent, TablePagination } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useResize, http } from 'gra-react-utils';
@@ -7,32 +7,33 @@ import { FileCopy } from '@mui/icons-material';
 
 function UbicadoDisabledExample() {
 
-    const { width, height } = useResize(React);
+    const formRef: any = createRef();
+
+    const viewRef: any = createRef();
 
     const [state, setState] = useState({ page: 0, rowsPerPage: 15, totalElements: 0 });
 
     const [result, setResult] = useState({ size: 0, data: [] });
 
-    useEffect(() => {
-
-        const header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
-        const paper: HTMLElement | null = document.querySelector('.page');
-        if (header && paper) {
-            paper.style.height = (height - header.offsetHeight) + 'px';
+    useResize(({ width, height }: any) => {
+        if (formRef.current) {
+            const [body, toolBar]: any = formRef.current.children;
+            toolBar.style.width = width + 'px';
+            body.style.height = (height - toolBar.offsetHeight) + 'px';
+            body.style.width = width + 'px';
         }
-
-    }, [width, height]);
+    }, viewRef);
 
     const emptyRows = result.data && result.data.length;
 
     const onPageChange = (
-        page:any
+        page: any
     ) => {
         setState({ ...state, page: page });
     };
 
     const onRowsPerPageChange = (
-        event:any
+        event: any
     ) => {
         setState({ ...state, rowsPerPage: event.target.value });
     };
@@ -41,7 +42,7 @@ function UbicadoDisabledExample() {
         fetchData(state.page)
     }, [state.page, state.rowsPerPage]);
 
-    const fetchData = async (page:any) => {
+    const fetchData = async (page: any) => {
         const data = { data: [], size: 0 };
         const result = await (http.get(import.meta.env.VITE_APP_PATH + '/desaparecido/' + page + '/' + state.rowsPerPage + '?estado=1'));
         if (result !== '') {
@@ -52,7 +53,7 @@ function UbicadoDisabledExample() {
         setResult(data);
     };
 
-    function fechaHora(timestamp:any) {
+    function fechaHora(timestamp: any) {
         const fecha = new Date(timestamp);
         const dia = fecha.getDate().toString().padStart(2, '0');
         const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');

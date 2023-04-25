@@ -1,4 +1,4 @@
-import React, { useEffect, createRef, useState } from 'react';
+import { useEffect, useState, createRef } from 'react';
 import { Box, Paper, Button, Container, Grid, CardActionArea, CardActions, CardMedia, CardContent, InputAdornment } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useResize, http, useFormState } from 'gra-react-utils';
@@ -14,7 +14,7 @@ function DesaparecidoDisabledExample() {
 
     const formRef: any = createRef();
 
-    const { width, height } = useResize(React);
+    const viewRef: any = createRef();
 
     const { id } = useParams();
 
@@ -24,15 +24,14 @@ function DesaparecidoDisabledExample() {
 
     const [o, { defaultProps, set, validate }] = useFormState(useState, {}) as any;
 
-    useEffect(() => {
-
-        const header: HTMLElement | null = document.querySelector('.MuiToolbar-root');
-        const paper: HTMLElement | null = document.querySelector('.page');
-        if (header && paper) {
-            paper.style.height = (height - header.offsetHeight) + 'px';
+    useResize(({ width, height }: any) => {
+        if (formRef.current) {
+            const [body, toolBar]: any = formRef.current.children;
+            toolBar.style.width = width + 'px';
+            body.style.height = (height - toolBar.offsetHeight) + 'px';
+            body.style.width = width + 'px';
         }
-
-    }, [width, height]);
+    }, viewRef);
 
     useEffect(() => {
         if (id) {
