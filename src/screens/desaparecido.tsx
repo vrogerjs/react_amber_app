@@ -16,13 +16,9 @@ function DesaparecidoDisabledExample() {
 
     const { width, height } = useResize(React);
 
-    const [desaparecidos, setDesaparecidos] = useState([] as any);
-
     const [state, setState] = useState({ page: 0, rowsPerPage: 15, totalElements: 0 });
 
     const [result, setResult] = useState({ size: 0, data: [] });
-
-    const dispatch = useDispatch();
 
     useEffect(() => {
 
@@ -39,7 +35,6 @@ function DesaparecidoDisabledExample() {
     const onPageChange = (
         event, page
     ) => {
-        console.log(page);
         setState({ ...state, page: page });
     };
 
@@ -62,7 +57,6 @@ function DesaparecidoDisabledExample() {
             data.data = data.data.concat(result.content);
         }
         setResult(data);
-        console.log(data);
     };
 
     function fechaHora(timestamp) {
@@ -80,138 +74,97 @@ function DesaparecidoDisabledExample() {
     }
 
     return (
-        <Paper className="page color-plomo" style={{ overflow: 'auto' }}>
-            <Container maxWidth="lg">
-                <Card>
-                    <Typography gutterBottom component="div" fontSize={'20px'} className='text-center fw-bold pt-2' sx={{ textTransform: 'uppercase' }}>
-                        Personas Desaparecidas menores a 17 años
-                    </Typography>
-                    <Grid container>
-                        {/* <Grid item xs={12} sm={12} md={10} className='p-3'>
-                            <TextField id="outlined-basic" label="Apellidos y Nombres" variant="outlined" fullWidth />
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={2} className='p-3'>
-                            <Button fullWidth className='hover-white bg-teal' variant="contained" color="success" href='http://sisgedo.regionancash.gob.pe/sisgedonew/app/main.php' target={'_blank'} startIcon={<SendIcon />}>
-                                Buscar
-                            </Button>
-                        </Grid> */}
-                        {(result && result.data && result.data.length ? result.data : [])
-                            .map((row: any, index) => {
-                                return (
-                                    <Grid item xs={12} sm={6} md={4} className='p-3'>
-                                        <Card sx={{ backgroundColor: '#E0E0E0' }}>
-                                            <CardActionArea className='mt-4'>
-                                                <img
-                                                    alt="Foto"
-                                                    height={'200px'}
-                                                    width={'150px'}
-                                                    src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (import.meta.env.VITE_PUBLIC_URL + "/male-female.jpg")}
-                                                    style={{ display: 'block', margin: '0 auto' }}
-                                                />
-                                                {/* <img alt="Foto" height={'200px'} width={'150px'} src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (import.meta.env.VITE_PUBLIC_URL + "/male-female.jpg")} /> */}
-                                                <CardContent>
-                                                    <Typography gutterBottom component="div" textAlign={'center'} fontSize={'20px'} fontWeight={'bold'}>
-                                                        {row.persona.apePaterno} {row.persona.apeMaterno} {row.persona.nombres}
-                                                    </Typography>
-                                                    <Typography variant="body1" color="text.secondary" textAlign={'center'}>
-                                                        Hecho ocurrido el:
-                                                        <br></br>
-                                                        {fechaHora(row.fechaHoraHecho)}
-                                                    </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-                                            <CardActions className='pl-6'>
-                                                <Grid item xs={12} md={12}>
-                                                    <MapWrapper
-                                                        location={[row.longitud ? row.longitud : -77.52888423325149, row.latitud ? row.latitud : -9.529897122270743]}
-                                                        features={[]} onChange={(e:any) => {console.log(e)}} />
-                                                </Grid>
-
-                                                <Box sx={{ width: '100%' }}>
-                                                    <Button fullWidth className='hover-white mb-1' variant="contained" color="error" href={import.meta.env.VITE_PUBLIC_URL + `/alerta/${row.id}`} startIcon={<FileCopy />}>
-                                                        Nota de Alerta
-                                                    </Button>
-                                                    <Button fullWidth className='hover-white bg-teal mt-1' variant="contained" color="success" href={import.meta.env.VITE_PUBLIC_URL + `/informacion/${row.id}`} startIcon={<NotificationsActive />}>
-                                                        Brindar Información
-                                                    </Button>
-                                                </Box>
-
-                                            </CardActions>
-                                            <CardActions className='text-center'>
-                                                <Grid container>
-                                                    <Grid item xs={5}>
-                                                    </Grid>
-                                                    <Grid item xs={1}>
-                                                        <CardMedia
-                                                            component="img"
-                                                            sx={{ height: '70', width: '70', margin: 'auto', borderRadius: '5px' }}
-                                                            image={import.meta.env.VITE_PUBLIC_URL + "/whatsap.png"}
-                                                            alt="Busqueda SISGEDO."
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={1}>
-                                                        <CardMedia
-                                                            component="img"
-                                                            sx={{ height: '70', width: '70', margin: 'auto', borderRadius: '5px', border: '1px solid #009688', marginLeft: '5px' }}
-                                                            image={import.meta.env.VITE_PUBLIC_URL + "/phone.jpg"}
-                                                            alt="Busqueda SISGEDO."
-                                                        />
-                                                    </Grid>
-                                                </Grid>
-                                            </CardActions>
-                                        </Card>
-                                    </Grid>
-                                );
-                            })}
-                    </Grid>
-
-                    {/* <Card
-                        sx={{
-                            backgroundColor: '#4CAF50',
-                            borderRadius: '8px',
-                            color: '#fff',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            minHeight: '5px', // Para evitar que el contenedor se colapse cuando no hay suficientes elementos
-                        }}
-                    >
-                        <CardActions>
-                            <TablePagination
-                                rowsPerPageOptions={[15, 30, 60]}
-                                component="div"
-                                count={state.totalElements}
-                                rowsPerPage={state.rowsPerPage}
-                                page={state.page}
-                                onPageChange={onPageChange}
-                                onRowsPerPageChange={onRowsPerPageChange}
-                            />
-                        </CardActions>
-                    </Card> */}
-
-
-                    <CardActions sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <TablePagination
-                            rowsPerPageOptions={[15, 30, 60]}
-                            component="div"
-                            count={state.totalElements}
-                            rowsPerPage={state.rowsPerPage}
-                            page={state.page}
-                            onPageChange={onPageChange}
-                            onRowsPerPageChange={onRowsPerPageChange}
-                        />
-                    </CardActions>
-                </Card>
-            </Container>
-            {/* <Alert icon={false} severity="success" sx={{ textAlign: 'center' }}>
-
-            </Alert> */}
-            {(!emptyRows) && (
+        <Container maxWidth="lg">
+            <Card>
                 <Typography gutterBottom component="div" fontSize={'20px'} className='text-center fw-bold pt-2' sx={{ textTransform: 'uppercase' }}>
-                    No data
+                    Personas Desaparecidas menores a 17 años
                 </Typography>
-            )}
-        </Paper>
+                <Grid container>
+                    {(result && result.data && result.data.length ? result.data : [])
+                        .map((row: any, index) => {
+                            return (
+                                <Grid item xs={12} sm={6} md={4} className='p-3' key={row.id}>
+                                    <Card sx={{ backgroundColor: '#E0E0E0' }}>
+                                        <CardActionArea className='mt-4'>
+                                            <img
+                                                alt="Foto"
+                                                height={'200px'}
+                                                width={'150px'}
+                                                src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (import.meta.env.VITE_PUBLIC_URL + "/male-female.jpg")}
+                                                style={{ display: 'block', margin: '0 auto' }}
+                                            />
+                                            {/* <img alt="Foto" height={'200px'} width={'150px'} src={row.persona.foto ? 'data:image/png;base64, ' + row.persona.foto : (import.meta.env.VITE_PUBLIC_URL + "/male-female.jpg")} /> */}
+                                            <CardContent className='p-0'>
+                                                <Typography gutterBottom component="div" textAlign={'center'} fontSize={'20px'} fontWeight={'bold'}>
+                                                    {row.persona.apePaterno} {row.persona.apeMaterno} {row.persona.nombres}
+                                                </Typography>
+                                                <Typography variant="body1" color="text.secondary" textAlign={'center'}>
+                                                    Hecho ocurrido el:
+                                                    <br></br>
+                                                    {fechaHora(row.fechaHoraHecho)}
+                                                </Typography>
+                                                <Grid item xs={12} md={12}>
+                                                    <MapWrapper location={[parseFloat(row.longitud), parseFloat(row.latitud)]} features={[]} />
+                                                </Grid>
+                                            </CardContent>
+                                        </CardActionArea>
+
+                                        <CardActions className='pl-6'>
+                                            <Box sx={{ width: '100%' }}>
+                                                <Button fullWidth className='hover-white mb-1' variant="contained" color="error" href={import.meta.env.VITE_PUBLIC_URL + `/alerta/${row.id}`} startIcon={<FileCopy />}>
+                                                    Nota de Alerta
+                                                </Button>
+                                                <Button fullWidth className='hover-white bg-teal mt-1' variant="contained" color="success" href={import.meta.env.VITE_PUBLIC_URL + `/informacion/${row.id}`} startIcon={<NotificationsActive />}>
+                                                    Brindar Información
+                                                </Button>
+                                            </Box>
+
+                                        </CardActions>
+                                        <CardActions className='text-center'>
+                                            <Grid container>
+                                                <Grid item xs={5}>
+                                                </Grid>
+                                                <Grid item xs={1}>
+                                                    <CardMedia
+                                                        component="img"
+                                                        sx={{ height: '70', width: '70', margin: 'auto', borderRadius: '5px' }}
+                                                        image={import.meta.env.VITE_PUBLIC_URL + "/whatsap.png"}
+                                                        alt="Busqueda SISGEDO."
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={1}>
+                                                    <CardMedia
+                                                        component="img"
+                                                        sx={{ height: '70', width: '70', margin: 'auto', borderRadius: '5px', border: '1px solid #009688', marginLeft: '5px' }}
+                                                        image={import.meta.env.VITE_PUBLIC_URL + "/phone.jpg"}
+                                                        alt="Busqueda SISGEDO."
+                                                    />
+                                                </Grid>
+                                            </Grid>
+                                        </CardActions>
+                                    </Card>
+                                </Grid>
+                            );
+                        })}
+                </Grid>
+                {(!emptyRows) && (
+                    <Typography gutterBottom component="div" fontSize={'20px'} className='text-center fw-bold pt-2' sx={{ textTransform: 'uppercase' }}>
+                        No existen datos.
+                    </Typography>
+                )}
+                <CardActions sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <TablePagination
+                        rowsPerPageOptions={[15, 30, 60]}
+                        component="div"
+                        count={state.totalElements}
+                        rowsPerPage={state.rowsPerPage}
+                        page={state.page}
+                        onPageChange={onPageChange}
+                        onRowsPerPageChange={onRowsPerPageChange}
+                    />
+                </CardActions>
+            </Card>
+        </Container>
     );
 }
 

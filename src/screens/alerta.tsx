@@ -70,6 +70,7 @@ function AlertaDisabledExample() {
                 set(o => ({ ...o, fechaNacimiento: result.persona.fechaNacimiento }));
                 set(o => ({ ...o, sexo: result.persona.sexo }));
                 set(o => ({ ...o, estadoCivil: result.persona.estadoCivil }));
+                set(o => ({ ...o, foto: result.persona.foto }));
                 set(o => ({ ...o, distrito: result.distrito.distrito }));
                 set(o => ({ ...o, provincia: result.distrito.provincia.provincia }));
                 set(o => ({ ...o, departamento: result.distrito.provincia.departamento.departamento }));
@@ -159,11 +160,12 @@ function AlertaDisabledExample() {
                             </Typography>
                         </Grid>
                         <Grid item xs={12} sm={12} md={4} className='mt-3' sx={{ paddingLeft: '1rem' }}>
-                            <CardMedia
-                                component="img"
-                                sx={{ height: '200px', width: '200px', margin: 'auto' }}
-                                image={import.meta.env.VITE_PUBLIC_URL + "/little-boy.jpg"}
-                                alt="Busqueda SISGEDO."
+                            <img
+                                alt="Foto"
+                                height={'200px'}
+                                width={'150px'}
+                                src={o.foto ? 'data:image/png;base64, ' + o.foto : (import.meta.env.VITE_PUBLIC_URL + "/male-female.jpg")}
+                                style={{ display: 'block', margin: '0 auto' }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={12} md={8} className='mt-3' sx={{ paddingLeft: '1rem' }}>

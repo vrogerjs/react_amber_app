@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
-import FormDisabledExample from './screens/form';
 import MainDisabledExample from './screens/main';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
-import SearchDisabledExample from './screens/search';
 import VideoDisabledExample from './screens/video';
 import AlertaDisabledExample from './screens/alerta';
 import InformacionDisabledExample from './screens/informacion';
@@ -267,6 +265,7 @@ function App() {
                     key='HOME'
                     href={import.meta.env.VITE_PUBLIC_URL + "/"}
                     sx={{ my: 2, color: 'white', display: 'block' }}
+                    className='menu-button'
                   >
                     HOME
                   </Button>
@@ -274,6 +273,7 @@ function App() {
                     key='DESAPARECIDOS'
                     href={import.meta.env.VITE_PUBLIC_URL + "/desaparecido"}
                     sx={{ my: 2, color: 'white', display: 'block' }}
+                    className='menu-button'
                   >
                     DESAPARECIDOS
                   </Button>
@@ -281,6 +281,7 @@ function App() {
                     key='UBICADOS'
                     href={import.meta.env.VITE_PUBLIC_URL + "/ubicado"}
                     sx={{ my: 2, color: 'white', display: 'block' }}
+                    className='menu-button'
                   >
                     UBICADOS
                   </Button>
@@ -288,6 +289,7 @@ function App() {
                     key='COMO DENUNCIAR?'
                     href={import.meta.env.VITE_PUBLIC_URL + "/denuncia"}
                     sx={{ my: 2, color: 'white', display: 'block' }}
+                    className='menu-button'
                   >
                     COMO DENUNCIAR?
                   </Button>
@@ -306,12 +308,9 @@ function App() {
           </AppBar>
         </Container>
 
-
         <Router basename={import.meta.env.VITE_PUBLIC_URL}>
           <Routes>
             <Route path={`/`} element={<MainDisabledExample />} />
-            <Route path={`/register`} element={<FormDisabledExample />} />
-            <Route path={`/search`} element={<SearchDisabledExample />} />
             <Route path={`/video`} element={<VideoDisabledExample />} />
             <Route path={`/desaparecido`} element={<DesaparecidoDisabledExample />} />
             <Route path={`/ubicado`} element={<UbicadoDisabledExample />} />
@@ -322,7 +321,6 @@ function App() {
       </Box>
       <VSnackbar />
       <VDialog />
-
     </div>
   );
 }
