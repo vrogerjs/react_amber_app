@@ -192,7 +192,7 @@ function MapWrapper(props: any) {
             <div className="clicked-coord-label">
                 <p>{(selectedCoord) ? toStringXY(selectedCoord, 5) : ''}</p>
             </div>
-            <div class="marker" title="Marker"></div>
+            <div className="marker" title="Marker"></div>
             <div id="popup" className="ol-popup">
                 <a href="#" id="popup-closer" className="ol-popup-closer"></a>
                 <div id="popup-content"></div>
